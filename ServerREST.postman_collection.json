@@ -697,7 +697,7 @@
 					]
 				}
 			],
-			"description": "Esse folder serve como base para os testes manuais e para os testes automatizados, as execessões estão separadas em categorias nos folders seguintes"
+			"description": "Esse folder serve como base para os testes manuais e para os testes automatizados, as exceções estão separadas em categorias nos folders seguintes"
 		},
 		{
 			"name": "Teste Usuario",
@@ -2974,6 +2974,30 @@
 						},
 						{
 							"name": "Listar produto por id",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Status code is 200\", function () {",
+											"    pm.response.to.have.status(200);",
+											"});",
+											"",
+											"const response = pm.response.json()",
+											"",
+											"",
+											"pm.test('produto listado corretamente', ()=> {",
+											"    pm.expect(response).to.be.an('object')",
+											"    pm.expect(response.nome).to.exist",
+											"    pm.expect(response.nome).to.be.eql(pm.collectionVariables.get('nomeProduto'))",
+											"    pm.expect(response._id).to.be.eql(pm.collectionVariables.get('idProduto'))",
+											"})"
+										],
+										"type": "text/javascript",
+										"packages": {}
+									}
+								}
+							],
 							"request": {
 								"method": "GET",
 								"header": [],
